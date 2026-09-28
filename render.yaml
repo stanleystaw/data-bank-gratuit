@@ -1,5 +1,4 @@
 services:
-  # Service principal - Data Bank Gratuit - Sans carte, sans PC, sans MiFi
   - type: web
     name: data-bank-gratuit
     env: docker
@@ -12,21 +11,19 @@ services:
         value: production
       - key: PORT
         value: 10000
-    # Render free = 750h/mois gratuit, sleep après 15min inactivité, 0F sans carte
+      # Pour persistance, ajoute PostgreSQL gratuit Render (sans carte, 90 jours gratuit)
+      # Va sur Render Dashboard > New > PostgreSQL > Free > Copie Internal Database URL
+      # Puis ajoute env var DATABASE_URL avec cette URL
+      # - key: DATABASE_URL
+      #   value: postgres://...
 
-  # Alternative: Service avec disque persistant (payant mais garde data)
-  # - type: web
-  #   name: data-bank-persistant
-  #   env: docker
-  #   plan: starter
-  #   disk:
-  #     name: data-bank-data
-  #     mountPath: /app/data
-  #     sizeGB: 1
+# Pour persistance gratuite sans carte, alternative: Supabase (gratuit sans carte) ou Turso
+# Mais Render Free sans DB = SQLite éphémère = Go effacés à chaque deploy
 
-# Base de données gratuite PostgreSQL (alternative à SQLite pour Render)
-# databases:
-#   - name: data-bank-db
-#     plan: free
-#     databaseName: databank
-#     user: databank
+# Solution 1: PostgreSQL gratuit Render (recommandé, sans carte, persistant)
+# Va sur https://dashboard.render.com/new/database
+# Choisis PostgreSQL, Free, région Oregon, copie Internal Database URL
+# Dans ton service data-bank-gratuit, ajoute env var DATABASE_URL = cette URL
+
+# Solution 2: Garde SQLite mais dépose à nouveau après chaque deploy (60,5 Go = 6 clics)
+# C'est ce qui vient d'arriver: 60,5 Go effacés car Render Free sans disque persistant

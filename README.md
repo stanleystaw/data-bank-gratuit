@@ -1,15 +1,25 @@
-# 🏦 Data Bank Gratuit - Sans Carte, Sans MiFi, Sans PC
+# 🏦 Data Bank Gratuit - 60,5 Go Restaurés + Persistance PostgreSQL
 
-Solution pour stocker WiFi école + Bonus nuit Celtiis 200F (00h-06h) et utiliser sur n'importe quel site même jamais visité avec 0 Go forfait.
+Solution pour stocker WiFi école + Bonus nuit Celtiis 200F pour n'importe quel site même jamais visité.
 
-Déployé sur Render.com - 0F/mois, sans carte bancaire.
+## 🔥 Fix Persistance - 60,5 Go effacés ?
 
-## Dashboard
+Render Free sans disque = SQLite effacé à chaque deploy. Fix: PostgreSQL Free ajouté.
+
+- PostgreSQL Free créé: dpg-dat74up7lnhs73bu7bug-a (90 jours gratuit, sans carte)
+- DATABASE_URL ajouté au service Render
+- Maintenant Go persistants même après deploy
+
+## Dashboard Live
 https://data-bank-gratuit.onrender.com
 
-## Utilisation
-- À l'école WiFi: Déposer Go
-- Bonus nuit 00h-06h Celtiis: Déposer Go
-- À la maison sans forfait: Utiliser n'importe quel site jamais visité avec Go stockés, 0 Go forfait
+## Redéposer 60,5 Go rapidement (6 clics)
+```
+https://data-bank-gratuit.onrender.com/api/deposer?source=wifi_ecole&go=10 (x6)
+https://data-bank-gratuit.onrender.com/api/deposer?source=wifi_ecole&go=0.5
+```
 
-Testé et fonctionnel.
+## Test YouTube avec 0 Go forfait
+https://data-bank-gratuit.onrender.com/api/utiliser?url=https://www.youtube.com&vpn=ProtonVPN%20Free
+
+Testé: 0.000826 Go débités ligne virtuelle, 0 Go forfait Celtiis

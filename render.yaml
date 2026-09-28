@@ -1,0 +1,32 @@
+services:
+  # Service principal - Data Bank Gratuit - Sans carte, sans PC, sans MiFi
+  - type: web
+    name: data-bank-gratuit
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/stats
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    # Render free = 750h/mois gratuit, sleep après 15min inactivité, 0F sans carte
+
+  # Alternative: Service avec disque persistant (payant mais garde data)
+  # - type: web
+  #   name: data-bank-persistant
+  #   env: docker
+  #   plan: starter
+  #   disk:
+  #     name: data-bank-data
+  #     mountPath: /app/data
+  #     sizeGB: 1
+
+# Base de données gratuite PostgreSQL (alternative à SQLite pour Render)
+# databases:
+#   - name: data-bank-db
+#     plan: free
+#     databaseName: databank
+#     user: databank
